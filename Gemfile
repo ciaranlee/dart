@@ -4,6 +4,7 @@ gem "rack"
 gem "sinatra"
 gem "sinatra-reloader"
 gem "nokogiri"
+gem "json"
 
 group :test do
 	gem "rack-test"

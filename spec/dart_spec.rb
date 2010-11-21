@@ -8,8 +8,8 @@ describe 'MyApp' do
   end
 
   it 'should run a simple test' do
-    get '/'
-    last_response.status.should == 200
-    # last_response.status.should == 201  
+    get '/results.json?station=Seapoint'
+    # last_response.status.should == 200
+    last_response.status.should == 201  
   end
 end
