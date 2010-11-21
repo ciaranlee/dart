@@ -12,8 +12,8 @@ require 'json'
 set :public, File.dirname(__FILE__) + '/public'
 
 get '/results.json' do
-  @keys = %w(route service scheduled eta due info)
-  @row_data = []
+  keys = %w(route service scheduled eta due info)
+  row_data = []
   uri = URI.parse("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{params[:station]}")
   response = Net::HTTP.get_response(uri)
   doc = Nokogiri::HTML(response.body)
@@ -29,12 +29,12 @@ get '/results.json' do
         else
           this_rows_data = {:direction => @current_direction}
           row.css('td').each_with_index do |td, td_index|
-            this_rows_data[@keys[td_index]] = td.content
+            this_rows_data[keys[td_index]] = td.content
           end
-          @row_data << this_rows_data
+          row_data << this_rows_data
         end
       end
     end
   end
-  @row_data.to_json
+  row_data.to_json
 end
