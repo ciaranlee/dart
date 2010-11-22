@@ -1,11 +1,2 @@
-require 'dart.rb'
-
-require 'rubygems'
-
-require "bundler"
-Bundler.setup
-
-require 'rack'
-require 'sinatra'
-
+require File.join(File.dirname(__FILE__), 'dart.rb')
 run Sinatra::Application
