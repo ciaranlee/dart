@@ -23,29 +23,31 @@ end
 get '/results.json' do
   content_type :json
   results = {:results => [] }
-
   keys = %w(route service scheduled eta due info)
-  row_data = []
+
   uri = URI.parse("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{URI.escape(params[:station])}")
   response = Net::HTTP.get_response(uri)
-  doc = Nokogiri::HTML(response.body)
-  doc.css('tr').each_with_index do |row, index|
+
+  Nokogiri::HTML(response.body).css('tr').each_with_index do |row, index|
     case index
     when 4
       @time = row.to_s.match(/(\d+:\d+)/)[1]
     else
       if @time
         if row.content.match(/Journey\s+(.+bound)/) && @current_direction != $1
+          results[:results] << @directional_trains if @directional_trains
           @current_direction = $1
+          @directional_trains = {:direction => @current_direction, :trains => []}
         else
-          this_rows_data = {:direction => @current_direction}
+          this_rows_data = {}
           row.css('td').each_with_index do |td, td_index|
             this_rows_data[keys[td_index]] = td.content
           end
-          results[:results] << this_rows_data
+          @directional_trains[:trains] << this_rows_data
         end
       end
     end
   end
+  results[:results] << @directional_trains if @directional_trains
   results.to_json
 end
