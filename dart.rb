@@ -22,6 +22,7 @@ end
 
 get '/results.json' do
   content_type :json
+  results = {:results => [] }
 
   keys = %w(route service scheduled eta due info)
   row_data = []
@@ -34,17 +35,17 @@ get '/results.json' do
       @time = row.to_s.match(/(\d+:\d+)/)[1]
     else
       if @time
-        if row.content.match(/Journey\s+(.+bound)/)
+        if row.content.match(/Journey\s+(.+bound)/) && @current_direction != $1
           @current_direction = $1
         else
           this_rows_data = {:direction => @current_direction}
           row.css('td').each_with_index do |td, td_index|
             this_rows_data[keys[td_index]] = td.content
           end
-          row_data << this_rows_data
+          results[:results] << this_rows_data
         end
       end
     end
   end
-  {:results => row_data }.to_json
+  results.to_json
 end
