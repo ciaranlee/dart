@@ -9,6 +9,11 @@ require "sinatra/reloader" if development?
 require 'nokogiri'
 require 'json'
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
+
 set :public, File.dirname(__FILE__) + '/public'
 
 get '/' do

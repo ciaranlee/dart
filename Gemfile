@@ -5,6 +5,7 @@ gem "sinatra"
 gem "sinatra-reloader"
 gem "nokogiri"
 gem "json"
+gem "newrelic_rpm"
 
 group :test do
 	gem "rack-test"

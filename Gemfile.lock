@@ -11,6 +11,7 @@ GEM
     json (1.4.6)
     monkey-lib (0.5.4)
       backports
+    newrelic_rpm (2.13.3)
     nokogiri (1.4.4)
     rack (1.2.1)
     rack-test (0.5.6)
@@ -48,6 +49,7 @@ DEPENDENCIES
   autotest-growl
   fakeweb
   json
+  newrelic_rpm
   nokogiri
   rack
   rack-test
