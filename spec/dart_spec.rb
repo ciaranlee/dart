@@ -13,9 +13,15 @@ describe 'Dart' do
       last_response.status.should == 200
     end
 
+    it 'should be formatted as JSON' do
+      get '/results.json?station=Seapoint'
+      last_response.content_type.should == 'application/json;charset=utf-8'
+    end
+
     it 'should return a json structure' do
       get '/results.json?station=Seapoint'
       JSON.parse(last_response.body).should == []
+      # this is failing with an odd character encoding issue, probably 1.9 related...
       # JSON.parse(last_response.body).should == [
       #   {"direction"=>"Northbound", "route"=>" Bray to Malahide(E813)", "service"=>"DART", "scheduled"=>"12:33", "eta"=>"12:33", "due"=>"6 Mins", "info"=>" Arrived Sandycove"},
       #   {"direction"=>"Northbound", "route"=>" Bray to Howth(E915)", "service"=>"DART", "scheduled"=>"12:48", "eta"=>"12:49", "due"=>"22 Mins", "info"=>" Departed Bray"},

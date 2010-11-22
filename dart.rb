@@ -16,6 +16,8 @@ get '/' do
 end
 
 get '/results.json' do
+  content_type :json
+
   keys = %w(route service scheduled eta due info)
   row_data = []
   uri = URI.parse("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{URI.escape(params[:station])}")
@@ -25,7 +27,6 @@ get '/results.json' do
     case index
     when 4
       @time = row.to_s.match(/(\d+:\d+)/)[1]
-      puts "time is #{@time}"
     else
       if @time
         if row.content.match(/Journey\s+(.+bound)/)
