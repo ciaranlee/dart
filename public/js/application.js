@@ -1,4 +1,4 @@
-$('a.fetch_json').click(function() {
+$('#stations a').click(function() {
 	var jq_obj = $(this);
 	options = {url:this.href};
   fetch_trains(options);

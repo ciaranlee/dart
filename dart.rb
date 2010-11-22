@@ -14,7 +14,7 @@ set :public, File.dirname(__FILE__) + '/public'
 get '/results.json' do
   keys = %w(route service scheduled eta due info)
   row_data = []
-  uri = URI.parse("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{::URI.escape(params[:station])}")
+  uri = URI.parse("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{URI.escape(params[:station])}")
   response = Net::HTTP.get_response(uri)
   doc = Nokogiri::HTML(response.body)
   doc.css('tr').each_with_index do |row, index|
