@@ -11,6 +11,10 @@ require 'json'
 
 set :public, File.dirname(__FILE__) + '/public'
 
+get '/' do
+  redirect '/index.html'
+end
+
 get '/results.json' do
   keys = %w(route service scheduled eta due info)
   row_data = []
