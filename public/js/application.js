@@ -1,15 +1,16 @@
 $('#stations a').click(function() {
+  $('#results').html('<h2>loading...</h2>');
   var jq_obj = $(this);
-  options = {url:this.href};
+  options = {url:jq_obj.attr('data-link')};
   fetch_trains(options);
-  return false;
+  return true;
 });
 
 function fetch_trains (options) {
   var results_div = $('#results');
-  results_div.html('');
   $.getJSON(options.url,
     function(json) {
+      results_div.html('');
       $(json.results).each(function(index) {
         var direction_div = $('<div class="direction"><h2>'+this.direction+'</h2></div>');
         var ol = $('<ol></ol>');
