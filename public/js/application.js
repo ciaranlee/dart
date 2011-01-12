@@ -15,14 +15,12 @@ function fetch_trains (options) {
         var ol = $('<ol></ol>');
         for (var i=0; i < this.trains.length; i++) {
           var li = $('<li></li>')
-            .append($('<dl></dl>')
-              .append('<dt>service</dt><dd>'+this.trains[i].service+'</dd>')
-              .append('<dt>eta</dt><dd>'+this.trains[i].eta+'</dd>')
-              .append('<dt>scheduled</dt><dd>'+this.trains[i].scheduled+'</dd>')
-              .append('<dt>due</dt><dd>'+this.trains[i].due+'</dd>')
-              .append('<dt>route</dt><dd>'+this.trains[i].route+'</dd>')
-              .append('<dt>info</dt><dd>'+this.trains[i].info+'</dd>')
-            );
+              .append('<dl><dt class="onecol">service</dt><dd>'+this.trains[i].service+'</dd><dl>')
+              .append('<dl><dt class="onecol">eta</dt><dd>'+this.trains[i].eta+'</dd><dl>')
+              .append('<dl><dt class="onecol">scheduled</dt><dd>'+this.trains[i].scheduled+'</dd><dl>')
+              .append('<dl><dt class="onecol">due</dt><dd>'+this.trains[i].due+'</dd><dl>')
+              .append('<dl><dt class="onecol">route</dt><dd>'+this.trains[i].route+'</dd><dl>')
+              .append('<dl><dt class="onecol">info</dt><dd>'+this.trains[i].info+'</dd><dl>');
             ol.append(li);
         };
         direction_div.append(ol);

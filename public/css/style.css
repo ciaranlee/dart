@@ -466,10 +466,13 @@ font-weight: lighter;
 }
 
 /* cssgrid layout */
-body {
-
+#results dt {
+  display:inline;
+  font-weight:bold;
 }
-
+#results dd {
+  display:inline;
+}
 
 /* Layout for mobile version */
 @media handheld, only screen and (max-width: 767px) {
