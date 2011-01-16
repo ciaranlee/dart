@@ -27,9 +27,15 @@ get '/results.json' do
   results = {:results => [] }
   keys = %w(route service scheduled eta due info)
 
-  http = EM::HttpRequest.new("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{params[:station]}").get
+  if EventMachine.reactor_running?
+    http = EM::HttpRequest.new("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{params[:station]}").get
+    response = http.response
+  else
+    uri = URI.parse("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{URI.escape(params[:station])}")
+    response = Net::HTTP.get_response(uri).body
+  end
 
-  Nokogiri::HTML(http.response).css('tr').each_with_index do |row, index|
+  Nokogiri::HTML(response).css('tr').each_with_index do |row, index|
     case index
     when 4
       @time = row.to_s.match(/(\d+:\d+)/)[1]
