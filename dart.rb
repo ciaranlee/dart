@@ -4,6 +4,8 @@ require "bundler"
 Bundler.setup
 
 require 'rack'
+require 'em-synchrony'
+require 'em-synchrony/em-http'
 require 'sinatra'
 require "sinatra/reloader" if development?
 require 'nokogiri'
@@ -25,10 +27,9 @@ get '/results.json' do
   results = {:results => [] }
   keys = %w(route service scheduled eta due info)
 
-  uri = URI.parse("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{URI.escape(params[:station])}")
-  response = Net::HTTP.get_response(uri)
+  http = EM::HttpRequest.new("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{params[:station]}").get
 
-  Nokogiri::HTML(response.body).css('tr').each_with_index do |row, index|
+  Nokogiri::HTML(http.response).css('tr').each_with_index do |row, index|
     case index
     when 4
       @time = row.to_s.match(/(\d+:\d+)/)[1]
