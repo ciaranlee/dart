@@ -28,7 +28,7 @@ get '/results.json' do
   keys = %w(route service scheduled eta due info)
 
   if EventMachine.reactor_running?
-    http = EM::HttpRequest.new("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{params[:station]}").get
+    http = EM::HttpRequest.new("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{URI.escape(params[:station])}").get
     response = http.response
   else
     uri = URI.parse("http://www.irishrail.ie/your_journey/ajax/ajaxRefreshResults.asp?station=#{URI.escape(params[:station])}")

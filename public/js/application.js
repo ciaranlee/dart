@@ -1,9 +1,10 @@
 $('#stations a').click(function() {
   $('#results').html('<h2>loading...</h2>');
   var jq_obj = $(this);
-  options = {url:jq_obj.attr('data-link')};
+  options = {url:this.href};
   fetch_trains(options);
-  return true;
+  window.location = "#results";
+  return false;
 });
 
 function fetch_trains (options) {
