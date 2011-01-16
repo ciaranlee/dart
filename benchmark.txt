@@ -1,0 +1,46 @@
+TLDR: 100 requests through a single dyno heroku app in 1.9 seconds (average response time is 1.4 seconds)
+
+ab -n 100 -c 100 http://dart.heroku.com/results.json?station=Portmarnock
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking dart.heroku.com (be patient).....done
+
+
+Server Software:        nginx/0.7.67
+Server Hostname:        dart.heroku.com
+Server Port:            80
+
+Document Path:          /results.json?station=Portmarnock
+Document Length:        621 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.905 seconds
+Complete requests:      100
+Failed requests:        0
+Write errors:           0
+Total transferred:      85902 bytes
+HTML transferred:       63963 bytes
+Requests per second:    52.48 [#/sec] (mean)
+Time per request:       1905.465 [ms] (mean)
+Time per request:       19.055 [ms] (mean, across all concurrent requests)
+Transfer rate:          44.03 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       96  153 160.7    127    1067
+Processing:   529 1273 348.6   1343    1759
+Waiting:      529 1263 352.5   1295    1759
+Total:        625 1426 351.1   1480    1900
+
+Percentage of the requests served within a certain time (ms)
+  50%   1480
+  66%   1691
+  75%   1735
+  80%   1763
+  90%   1855
+  95%   1883
+  98%   1891
+  99%   1900
+ 100%   1900 (longest request)
