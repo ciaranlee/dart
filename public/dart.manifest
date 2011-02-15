@@ -6,7 +6,7 @@ CACHE MANIFEST
 /index.html
 /css/style.css
 /js/libs/modernizr-1.6.min.js
-/js/plugins.js
+/libs/jquery.tmpl.js
 /js/application.js
 http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js
 
