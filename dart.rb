@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'cgi'
 
 require "bundler"
 Bundler.setup
@@ -19,7 +20,8 @@ end
 set :public, File.dirname(__FILE__) + '/public'
 
 get '/' do
-  redirect '/index.html'
+  @stations = ["Malahide", "Portmarnock", "Clongriffin", "Howth", "Sutton", "Bayside", "Howth Junction", "Kilbarrack", "Raheny", "Harmonstown", "Killester", "Clontarf Road", "Connolly", "Tara Street", "Pearse", "Grand Canal Dock", "Lansdowne Road", "Sandymount", "Sydney Parade", "Booterstown", "Blackrock", "Seapoint", "Salthill", "Dun Laoghaire", "Sandycove", "Glenageary", "Dalkey", "Killiney", "Shankill", "Bray", "Greystones"]
+  erb :index
 end
 
 get '/results.json' do
