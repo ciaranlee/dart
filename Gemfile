@@ -14,7 +14,7 @@ gem 'rack-fiber_pool',  :require => 'rack/fiber_pool'
 gem 'em-synchrony', :require => [
   'em-synchrony',
   'em-synchrony/em-http'
-  ]
+]
 
 # async http requires
 gem 'em-http-request', :require => 'em-http'
@@ -26,7 +26,4 @@ group :test do
   gem "rack-test"
   gem "rspec"
   gem "fakeweb"
-  gem 'autotest'
-  gem 'autotest-fsevent'
-  gem 'autotest-growl'
 end
