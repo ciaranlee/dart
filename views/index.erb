@@ -28,7 +28,7 @@
       <div class="row">
         <ul id="stations" class="twocol">
           <% @stations.each do |station| %>
-            <li><a href="/results.json?station=<%= CGI.escape(station) %>"><%= station %></a></li>
+            <li><a href="/results.json?station=<%= CGI.escape(station[:name]) %>"><%= station[:name] %></a></li>
           <% end %>
         </ul>
 
